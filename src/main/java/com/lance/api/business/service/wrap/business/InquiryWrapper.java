@@ -24,8 +24,7 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class InquiryWrapper extends BaseServiceWrapper
-{
+public class InquiryWrapper extends BaseServiceWrapper {
     /**
      * 此业务包装类的servCode
      */
@@ -34,15 +33,13 @@ public class InquiryWrapper extends BaseServiceWrapper
     private ApiService apiService;
 
     @Override
-    public String doCode()
-    {
+    public String doCode() {
         return servCode;
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public Map handle(Object... params) throws Exception
-    {
+    public Map handle(Object... params) throws Exception {
         // 返回结果map
         Map<String, Object> resultMap;
         ResponseCode failedMsg = null;
@@ -57,15 +54,12 @@ public class InquiryWrapper extends BaseServiceWrapper
         JsonResult queryInfo = apiService.queryInfo(queryValue);
 
         // 如果获取成功
-        if (queryInfo.getSuccess())
-        {
+        if (queryInfo.getSuccess()) {
             SampleModel model = (SampleModel) queryInfo.getData();
             resultMap = Communication.getInstance().getSuccessMap();
             resultMap.put(FieldNameModel.RECORD_COUNT, model.getCount());
             resultMap.put(FieldNameModel.RECORD_AMT, model.getAmt());
-        }
-        else
-        {
+        } else {
             failedMsg = (ResponseCode) queryInfo.getData();
             resultMap = Communication.getInstance().getFailedMap(failedMsg.getKey(), failedMsg.getValue());
         }

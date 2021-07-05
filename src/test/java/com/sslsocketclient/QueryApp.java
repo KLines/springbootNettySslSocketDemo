@@ -11,11 +11,9 @@ import static com.sslsocketclient.DeSplitDemo.createSocketNote;
 /**
  * Created by me on 2018/6/7.
  */
-public class 查询
-{
+public class QueryApp {
 
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         Map map = search("2", "1");
         ComposeDemo cd = new ComposeDemo();
         Socket ss = null;
@@ -47,14 +45,12 @@ public class 查询
      *
      * @return
      */
-    private static Map search(String key, String type)
-    {
+    private static Map search(String key, String type) {
         String serverCode = "200001";
         Map<String, String> mapQuery = new HashMap<>();
 
         //查询条件的类别
         mapQuery.put("queryType", type);
-        //对应查询类别的查询条件
         mapQuery.put("queryValue", key);
         //预留
         mapQuery.put("extend", "666");

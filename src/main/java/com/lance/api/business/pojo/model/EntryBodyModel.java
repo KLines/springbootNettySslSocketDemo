@@ -14,8 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntryBodyModel
-{
+public class EntryBodyModel {
     /**
      * 查询条件的类别
      */

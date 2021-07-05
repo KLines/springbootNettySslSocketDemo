@@ -9,22 +9,19 @@ import com.lance.api.business.pojo.model.EntryModel;
  * @author lance
  * @since 2018-10-15
  */
-public class SameServiceWrapper
-{
+public class SameServiceWrapper {
 
     /**
      * 判断是否存在servCode相同的情况
      *
      * @return
      */
-    public Boolean hasSameService()
-    {
+    public Boolean hasSameService() {
         return false;
     }
 
 
-    public boolean sameIsMyDo(EntryModel entryModel)
-    {
+    public boolean sameIsMyDo(EntryModel entryModel) {
         return false;
     }
 }

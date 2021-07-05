@@ -14,8 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntryModel
-{
+public class EntryModel {
     private String head;
     private String body;
     private EntryHeadModel headModel;

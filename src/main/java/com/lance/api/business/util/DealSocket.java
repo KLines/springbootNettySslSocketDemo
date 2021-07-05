@@ -33,8 +33,7 @@ import java.util.Map;
 @Slf4j
 @Component
 @SuppressWarnings("unchecked")
-public class DealSocket
-{
+public class DealSocket {
     /**
      * service包装类容器
      */
@@ -48,8 +47,7 @@ public class DealSocket
      * @throws Exception
      */
     @Async
-    public void analysisAndDealMsg(Socket socket) throws Exception
-    {
+    public void analysisAndDealMsg(Socket socket) throws Exception {
         /*
           1.获取socket数据
         */
@@ -62,8 +60,7 @@ public class DealSocket
 
         // 解析报文
         EntryModel entryModel = ComposeUtil.deSplit(new ByteDataBuffer(buffer));
-        if (entryModel == null)
-        {
+        if (entryModel == null) {
             noSignFlag(bos);
             return;
         }
@@ -89,56 +86,39 @@ public class DealSocket
      * @param bos
      */
     @Async
-    public void doBusiness(String servCode, String msgId, EntryModel entryModel, BufferedOutputStream bos)
-    {
+    public void doBusiness(String servCode, String msgId, EntryModel entryModel, BufferedOutputStream bos) {
         Map<String, Object> resultMap = null;
-        try
-        {
-            if (StringUtils.isEmpty(servCode) || StringUtils.isEmpty(msgId))
-            {
+        try {
+            if (StringUtils.isEmpty(servCode) || StringUtils.isEmpty(msgId)) {
                 resultMap = Communication.getInstance().getFailedMap(ResponseCode._0000.getKey(), ResponseCode._0000.getValue());
-            }
-            else
-            {
+            } else {
                 log.info("业务处理开始");
 
                 // 根据servCode查询所对应的service业务处理类
                 BaseServiceWrapper baseServiceWrapper = serviceWrapperContainer.getService(servCode);
                 // 或有业务存在servCode相同的情况，需加以判断是否存在servCode相同的情况
-                if (baseServiceWrapper.hasSameService())
-                {
+                if (baseServiceWrapper.hasSameService()) {
                     // 根据servCode查询出所有servCode相同的service
                     List<BaseServiceWrapper> baseServiceWrappers = serviceWrapperContainer.findSameService(servCode);
-                    for (BaseServiceWrapper bs : baseServiceWrappers)
-                    {
-                        if (bs.sameIsMyDo(entryModel))
-                        {
+                    for (BaseServiceWrapper bs : baseServiceWrappers) {
+                        if (bs.sameIsMyDo(entryModel)) {
                             resultMap = bs.handle(entryModel);
                         }
                     }
-                }
-                else
-                {
+                } else {
                     resultMap = baseServiceWrapper.handle(entryModel);
                 }
                 log.info("业务处理完毕");
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             log.error("业务处理发生异常:\n{}", e.getMessage());
             e.printStackTrace();
             resultMap = Communication.getInstance().getFailedMap(ResponseCode._0009.getKey(), ResponseCode._0009.getValue());
-        }
-        finally
-        {
-            try
-            {
+        } finally {
+            try {
                 bos.write(ComposeUtil.doCanProcess(resultMap, servCode, msgId));
                 bos.flush();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -151,15 +131,12 @@ public class DealSocket
      * @param msgId
      * @param entryModel
      */
-    public ReturnModel doBusiness(String servCode, String msgId, EntryModel entryModel)
-    {
+    public ReturnModel doBusiness(String servCode, String msgId, EntryModel entryModel) {
         ReturnModel resultModel = new ReturnModel();
         resultModel.setServCode(servCode);
         resultModel.setMsgId(msgId);
-        try
-        {
-            if (StringUtils.isEmpty(servCode) || StringUtils.isEmpty(msgId))
-            {
+        try {
+            if (StringUtils.isEmpty(servCode) || StringUtils.isEmpty(msgId)) {
                 return resultModel.setMap(Communication.getInstance().getFailedMap(ResponseCode._0000.getKey(), ResponseCode._0000.getValue()));
             }
             log.info("业务处理开始");
@@ -167,26 +144,19 @@ public class DealSocket
             // 根据servCode查询所对应的service业务处理类
             BaseServiceWrapper baseServiceWrapper = serviceWrapperContainer.getService(servCode);
             // 或有业务存在servCode相同的情况，需加以判断是否存在servCode相同的情况
-            if (baseServiceWrapper.hasSameService())
-            {
+            if (baseServiceWrapper.hasSameService()) {
                 // 根据servCode查询出所有servCode相同的service
                 List<BaseServiceWrapper> baseServiceWrappers = serviceWrapperContainer.findSameService(servCode);
-                for (BaseServiceWrapper bs : baseServiceWrappers)
-                {
-                    if (bs.sameIsMyDo(entryModel))
-                    {
+                for (BaseServiceWrapper bs : baseServiceWrappers) {
+                    if (bs.sameIsMyDo(entryModel)) {
                         resultModel.setMap(bs.handle(entryModel));
                     }
                 }
-            }
-            else
-            {
+            } else {
                 resultModel.setMap(baseServiceWrapper.handle(entryModel));
             }
             log.info("业务处理完毕");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             log.error("业务处理发生异常:\n{}", e.getMessage());
             e.printStackTrace();
             resultModel.setMap(Communication.getInstance().getFailedMap(ResponseCode._0009.getKey(), ResponseCode._0009.getValue()));
@@ -199,17 +169,13 @@ public class DealSocket
      *
      * @param bos
      */
-    public void noSignFlag(BufferedOutputStream bos)
-    {
+    public void noSignFlag(BufferedOutputStream bos) {
         Map<String, Object> resultMap = Communication.getInstance().getFailedMap(ResponseCode._0000.getKey(), ResponseCode._0000.getValue());
-        try
-        {
+        try {
             bos.write(ComposeUtil.doCanProcess(resultMap, "", ""));
             bos.flush();
             bos.close();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

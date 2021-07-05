@@ -4,15 +4,13 @@ import com.lance.api.common.base.dao.BaseDao;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class SysDao extends BaseDao
-{
+public class SysDao extends BaseDao {
     /**
      * 获取当前系统时间
      *
      * @return
      */
-    public String getDBCurrentTime()
-    {
+    public String getDBCurrentTime() {
         String sql = "select to_char(sysdate,'yyyy-MM-dd hh24:mi:ss') from dual";
         return queryForString(sql);
     }
@@ -22,8 +20,7 @@ public class SysDao extends BaseDao
      *
      * @return
      */
-    public String getDBCurrentDate()
-    {
+    public String getDBCurrentDate() {
         String sql = "select to_char(sysdate,'yyyy-MM-dd') from dual";
         return queryForString(sql);
     }

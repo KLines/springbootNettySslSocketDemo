@@ -8,8 +8,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({FIELD})
 @Retention(RUNTIME)
-public @interface Validation
-{
+public @interface Validation {
     // 允许的值
     String[] allowValue() default {};
 

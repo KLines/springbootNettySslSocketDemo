@@ -20,16 +20,14 @@ import java.util.Map;
 @Data
 @Slf4j
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class BaseDao
-{
+public class BaseDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     /**
      * 执行Sql语句进行数据修改
      */
-    public void execute(String sql) throws DataAccessException
-    {
+    public void execute(String sql) throws DataAccessException {
         this.jdbcTemplate.execute(sql);
     }
 
@@ -39,16 +37,12 @@ public class BaseDao
      * @param sql
      * @return
      */
-    public double queryForDouble(String sql) throws DataAccessException
-    {
+    public double queryForDouble(String sql) throws DataAccessException {
         double backVal = 0.0;
-        try
-        {
+        try {
             Number number = (Number) this.jdbcTemplate.queryForObject(sql, Double.class);
             backVal = (number != null ? number.doubleValue() : 0.0);
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -61,16 +55,12 @@ public class BaseDao
      * @param args 参数数组
      * @return double
      */
-    public double queryForDouble(String sql, Object[] args) throws DataAccessException
-    {
+    public double queryForDouble(String sql, Object[] args) throws DataAccessException {
         double backVal = 0.0;
-        try
-        {
+        try {
             Number number = (Number) this.jdbcTemplate.queryForObject(sql, args, Double.class);
             backVal = (number != null ? number.doubleValue() : 0.0);
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -84,16 +74,12 @@ public class BaseDao
      * @param argTypes 参数类型数组(使用java.sql.Types常数)
      * @return double
      */
-    public double queryForDouble(String sql, Object[] args, int[] argTypes) throws DataAccessException
-    {
+    public double queryForDouble(String sql, Object[] args, int[] argTypes) throws DataAccessException {
         double backVal = 0.0;
-        try
-        {
+        try {
             Number number = (Number) this.jdbcTemplate.queryForObject(sql, args, argTypes, Double.class);
             backVal = (number != null ? number.doubleValue() : 0.0);
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -105,16 +91,12 @@ public class BaseDao
      * @param sql
      * @return
      */
-    public float queryForFloat(String sql) throws DataAccessException
-    {
+    public float queryForFloat(String sql) throws DataAccessException {
         float backVal = 0;
-        try
-        {
+        try {
             Number number = (Number) this.jdbcTemplate.queryForObject(sql, Float.class);
             backVal = (number != null ? number.floatValue() : 0);
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -127,16 +109,12 @@ public class BaseDao
      * @param args 参数数组
      * @return
      */
-    public float queryForFloat(String sql, Object[] args) throws DataAccessException
-    {
+    public float queryForFloat(String sql, Object[] args) throws DataAccessException {
         float backVal = 0;
-        try
-        {
+        try {
             Number number = (Number) this.jdbcTemplate.queryForObject(sql, args, Float.class);
             backVal = (number != null ? number.floatValue() : 0);
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -150,16 +128,12 @@ public class BaseDao
      * @param argTypes 参数类型数组(使用java.sql.Types常数)
      * @return
      */
-    public float queryForFloat(String sql, Object[] args, int[] argTypes) throws DataAccessException
-    {
+    public float queryForFloat(String sql, Object[] args, int[] argTypes) throws DataAccessException {
         float backVal = 0;
-        try
-        {
+        try {
             Number number = (Number) this.jdbcTemplate.queryForObject(sql, args, argTypes, Float.class);
             backVal = (number != null ? number.floatValue() : 0);
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -168,19 +142,14 @@ public class BaseDao
     /**
      * 查询Sql，返回int
      */
-    public int queryForInt(String sql) throws DataAccessException
-    {
+    public int queryForInt(String sql) throws DataAccessException {
         int backVal = 0;
-        try
-        {
+        try {
             Integer temBack = this.jdbcTemplate.queryForObject(sql, Integer.class);
-            if (null != temBack)
-            {
+            if (null != temBack) {
                 backVal = temBack;
             }
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -193,19 +162,14 @@ public class BaseDao
      * @param args 参数数组
      * @return int
      */
-    public int queryForInt(String sql, Object[] args) throws DataAccessException
-    {
+    public int queryForInt(String sql, Object[] args) throws DataAccessException {
         int backVal = 0;
-        try
-        {
+        try {
             Integer temBack = this.jdbcTemplate.queryForObject(sql, args, Integer.class);
-            if (null != temBack)
-            {
+            if (null != temBack) {
                 backVal = temBack;
             }
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -219,19 +183,14 @@ public class BaseDao
      * @param argTypes 参数类型数组(使用java.sql.Types常数)
      * @return
      */
-    public int queryForInt(String sql, Object[] args, int[] argTypes) throws DataAccessException
-    {
+    public int queryForInt(String sql, Object[] args, int[] argTypes) throws DataAccessException {
         int backVal = 0;
-        try
-        {
+        try {
             Integer temBack = this.jdbcTemplate.queryForObject(sql, args, argTypes, Integer.class);
-            if (null != temBack)
-            {
+            if (null != temBack) {
                 backVal = temBack;
             }
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -240,15 +199,11 @@ public class BaseDao
     /**
      * 查询Sql，返回List
      */
-    public List queryForList(String sql) throws DataAccessException
-    {
+    public List queryForList(String sql) throws DataAccessException {
         List<Map<String, Object>> backVal = null;
-        try
-        {
+        try {
             backVal = this.jdbcTemplate.query(sql, new RowMapperResultSetExtractor<Map<String, Object>>(new ColumnMapRowMapper(), 0));
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -261,15 +216,11 @@ public class BaseDao
      * @param args 参数数组
      * @return List
      */
-    public List queryForList(String sql, Object[] args) throws DataAccessException
-    {
+    public List queryForList(String sql, Object[] args) throws DataAccessException {
         List<Map<String, Object>> backVal = null;
-        try
-        {
+        try {
             backVal = this.jdbcTemplate.query(sql, args, new RowMapperResultSetExtractor<Map<String, Object>>(new ColumnMapRowMapper(), 0));
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -283,15 +234,11 @@ public class BaseDao
      * @param argTypes 参数类型数组(使用java.sql.Types常数)
      * @return
      */
-    public List queryForList(String sql, Object[] args, int[] argTypes) throws DataAccessException
-    {
+    public List queryForList(String sql, Object[] args, int[] argTypes) throws DataAccessException {
         List<Map<String, Object>> backVal = null;
-        try
-        {
+        try {
             backVal = this.jdbcTemplate.query(sql, args, argTypes, new RowMapperResultSetExtractor<Map<String, Object>>(new ColumnMapRowMapper(), 0));
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -300,19 +247,14 @@ public class BaseDao
     /**
      * 查询Sql，返回long
      */
-    public long queryForLong(String sql) throws DataAccessException
-    {
+    public long queryForLong(String sql) throws DataAccessException {
         long backVal = 0L;
-        try
-        {
+        try {
             Long temBack = this.jdbcTemplate.queryForObject(sql, Long.class);
-            if (null != temBack)
-            {
+            if (null != temBack) {
                 backVal = temBack;
             }
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
 
@@ -326,19 +268,14 @@ public class BaseDao
      * @param args 参数数组
      * @return long
      */
-    public long queryForLong(String sql, Object[] args) throws DataAccessException
-    {
+    public long queryForLong(String sql, Object[] args) throws DataAccessException {
         long backVal = 0L;
-        try
-        {
+        try {
             Long temBack = this.jdbcTemplate.queryForObject(sql, args, Long.class);
-            if (null != temBack)
-            {
+            if (null != temBack) {
                 backVal = temBack;
             }
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -352,19 +289,14 @@ public class BaseDao
      * @param argTypes 参数类型数组(使用java.sql.Types常数)
      * @return
      */
-    public long queryForLong(String sql, Object[] args, int[] argTypes) throws DataAccessException
-    {
+    public long queryForLong(String sql, Object[] args, int[] argTypes) throws DataAccessException {
         long backVal = 0L;
-        try
-        {
+        try {
             Long temBack = this.jdbcTemplate.queryForObject(sql, args, argTypes, Long.class);
-            if (null != temBack)
-            {
+            if (null != temBack) {
                 backVal = temBack;
             }
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -374,15 +306,11 @@ public class BaseDao
      * @param sql
      * @return Map 如果sql可以查到值，返回Map，否则返回null
      */
-    public Map queryForMap(String sql) throws DataAccessException
-    {
+    public Map queryForMap(String sql) throws DataAccessException {
         Map<String, Object> map = null;
-        try
-        {
+        try {
             map = this.jdbcTemplate.queryForMap(sql);
-        }
-        catch (EmptyResultDataAccessException emptyException)
-        {
+        } catch (EmptyResultDataAccessException emptyException) {
             map = null;
         }
         return map;
@@ -395,15 +323,11 @@ public class BaseDao
      * @param args 参数数组
      * @return Map
      */
-    public Map queryForMap(String sql, Object[] args) throws DataAccessException
-    {
+    public Map queryForMap(String sql, Object[] args) throws DataAccessException {
         Map<String, Object> backVal = null;
-        try
-        {
+        try {
             backVal = this.jdbcTemplate.queryForMap(sql, args);
-        }
-        catch (EmptyResultDataAccessException e)
-        {
+        } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
             backVal = null;
         }
@@ -418,15 +342,11 @@ public class BaseDao
      * @param argTypes 参数类型数组(使用java.sql.Types常数)
      * @return Map
      */
-    public Map queryForMap(String sql, Object[] args, int[] argTypes) throws DataAccessException
-    {
+    public Map queryForMap(String sql, Object[] args, int[] argTypes) throws DataAccessException {
         Map<String, Object> backVal = null;
-        try
-        {
+        try {
             backVal = this.jdbcTemplate.queryForMap(sql, args, argTypes);
-        }
-        catch (EmptyResultDataAccessException e)
-        {
+        } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
             backVal = null;
         }
@@ -436,15 +356,11 @@ public class BaseDao
     /**
      * 执行sql，查询String
      */
-    public String queryForString(String sql) throws DataAccessException
-    {
+    public String queryForString(String sql) throws DataAccessException {
         String backVal = null;
-        try
-        {
+        try {
             backVal = (String) this.jdbcTemplate.queryForObject(sql, String.class);
-        }
-        catch (EmptyResultDataAccessException e)
-        {
+        } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
             backVal = null;
         }
@@ -458,15 +374,11 @@ public class BaseDao
      * @param args 参数数组
      * @return String
      */
-    public String queryForString(String sql, Object[] args) throws DataAccessException
-    {
+    public String queryForString(String sql, Object[] args) throws DataAccessException {
         String backVal = null;
-        try
-        {
+        try {
             backVal = (String) this.jdbcTemplate.queryForObject(sql, args, String.class);
-        }
-        catch (EmptyResultDataAccessException e)
-        {
+        } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
             backVal = null;
         }
@@ -481,15 +393,11 @@ public class BaseDao
      * @param argTypes 参数类型数组(使用java.sql.Types常数)
      * @return String
      */
-    public String queryForString(String sql, Object[] args, int[] argTypes) throws DataAccessException
-    {
+    public String queryForString(String sql, Object[] args, int[] argTypes) throws DataAccessException {
         String backVal = null;
-        try
-        {
+        try {
             backVal = (String) this.jdbcTemplate.queryForObject(sql, args, argTypes, String.class);
-        }
-        catch (EmptyResultDataAccessException e)
-        {
+        } catch (EmptyResultDataAccessException e) {
             e.printStackTrace();
             backVal = null;
         }
@@ -499,14 +407,11 @@ public class BaseDao
     /**
      * 查询Sql，返回List
      */
-    public <T> List<T> queryForBaseList(String sql) throws DataAccessException
-    {
+    public <T> List<T> queryForBaseList(String sql) throws DataAccessException {
         List<T> backVal = null;
-        backVal = this.jdbcTemplate.query(sql, new RowMapper<T>()
-        {
+        backVal = this.jdbcTemplate.query(sql, new RowMapper<T>() {
             @Override
-            public T mapRow(ResultSet rs, int i) throws SQLException
-            {
+            public T mapRow(ResultSet rs, int i) throws SQLException {
                 String val = rs.getString(1);
                 return (T) val;
             }
@@ -521,14 +426,11 @@ public class BaseDao
      * @param args 参数数组
      * @return List
      */
-    public <T> List<T> queryForBaseList(String sql, Object[] args)
-    {
+    public <T> List<T> queryForBaseList(String sql, Object[] args) {
         List<T> backVal = null;
-        backVal = this.jdbcTemplate.query(sql, args, new RowMapper<T>()
-        {
+        backVal = this.jdbcTemplate.query(sql, args, new RowMapper<T>() {
             @Override
-            public T mapRow(ResultSet rs, int i) throws SQLException
-            {
+            public T mapRow(ResultSet rs, int i) throws SQLException {
                 String val = rs.getString(1);
                 return (T) val;
             }
@@ -544,14 +446,11 @@ public class BaseDao
      * @param argTypes 参数类型数组(使用java.sql.Types常数)
      * @return
      */
-    public <T> List<T> queryForBaseList(String sql, Object[] args, int[] argTypes)
-    {
+    public <T> List<T> queryForBaseList(String sql, Object[] args, int[] argTypes) {
         List<T> backVal = null;
-        backVal = this.jdbcTemplate.query(sql, args, argTypes, new RowMapper<T>()
-        {
+        backVal = this.jdbcTemplate.query(sql, args, argTypes, new RowMapper<T>() {
             @Override
-            public T mapRow(ResultSet rs, int i) throws SQLException
-            {
+            public T mapRow(ResultSet rs, int i) throws SQLException {
                 String val = rs.getString(1);
                 return (T) val;
             }
@@ -562,15 +461,11 @@ public class BaseDao
     /**
      * 执行数据修改操作，返回影响的行数
      */
-    public int update(final String sql) throws DataAccessException
-    {
+    public int update(final String sql) throws DataAccessException {
         int backVal;
-        try
-        {
+        try {
             backVal = this.jdbcTemplate.update(sql);
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -584,15 +479,11 @@ public class BaseDao
      * @return 影响的数据行数
      * @throws DataAccessException
      */
-    public int update(String sql, Object[] args) throws DataAccessException
-    {
+    public int update(String sql, Object[] args) throws DataAccessException {
         int backVal;
-        try
-        {
+        try {
             backVal = this.jdbcTemplate.update(sql, args);
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -607,15 +498,11 @@ public class BaseDao
      * @return 影响的数据行数
      * @throws DataAccessException
      */
-    public int update(String sql, Object[] args, int[] argTypes) throws DataAccessException
-    {
+    public int update(String sql, Object[] args, int[] argTypes) throws DataAccessException {
         int backVal;
-        try
-        {
+        try {
             backVal = this.jdbcTemplate.update(sql, args, argTypes);
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -628,15 +515,11 @@ public class BaseDao
      * @param args 参数数组
      * @return List
      */
-    public List queryForModelList(String sql, Object[] args, Class cls) throws DataAccessException
-    {
+    public List queryForModelList(String sql, Object[] args, Class cls) throws DataAccessException {
         List<Class> backVal = null;
-        try
-        {
+        try {
             backVal = this.jdbcTemplate.query(sql, args, new BeanPropertyRowMapper(cls));
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;
@@ -650,19 +533,13 @@ public class BaseDao
      * @param args 参数数组
      * @return entity
      */
-    public <T> T queryForModel(String sql, Object[] args, Class<T> cls) throws DataAccessException
-    {
+    public <T> T queryForModel(String sql, Object[] args, Class<T> cls) throws DataAccessException {
         T backVal = null;
-        try
-        {
+        try {
             backVal = this.jdbcTemplate.queryForObject(sql, args, new BeanPropertyRowMapper<T>(cls));
-        }
-        catch (EmptyResultDataAccessException dataAccessException)
-        {
+        } catch (EmptyResultDataAccessException dataAccessException) {
             backVal = null;
-        }
-        catch (DataAccessException dataAccessException)
-        {
+        } catch (DataAccessException dataAccessException) {
             throw dataAccessException;
         }
         return backVal;

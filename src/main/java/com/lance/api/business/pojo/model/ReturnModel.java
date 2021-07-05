@@ -11,8 +11,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
-public class ReturnModel
-{
+public class ReturnModel {
     private String servCode;
     private String msgId;
     private Map map;

@@ -9,8 +9,7 @@ import com.lance.api.common.base.model.JsonResult;
  * @author lance
  * @since 2018-10-15
  **/
-public interface ApiService
-{
+public interface ApiService {
     /**
      * 获取信息
      *

@@ -17,8 +17,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 @Configuration
 @EnableAsync
-public class ExecutorConfig
-{
+public class ExecutorConfig {
     @Value("${executor.corePoolSize}")
     private int corePoolSize;
     @Value("${executor.maxPoolSize}")
@@ -29,8 +28,7 @@ public class ExecutorConfig
     private String namePrefix;
 
     @Bean(name = "asyncServiceExecutor")
-    public Executor asyncServiceExecutor()
-    {
+    public Executor asyncServiceExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         //配置核心线程数
         executor.setCorePoolSize(corePoolSize);

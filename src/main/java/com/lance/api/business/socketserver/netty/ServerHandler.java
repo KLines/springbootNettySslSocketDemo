@@ -20,14 +20,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Sharable
 @Slf4j
-public class ServerHandler extends ChannelInboundHandlerAdapter
-{
+public class ServerHandler extends ChannelInboundHandlerAdapter {
     @Autowired
     private DealSocket dealSocket;
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception
-    {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         EntryModel entryModel = (EntryModel) msg;
 
         String servCode = entryModel.getHeadModel().getServCode();
@@ -41,14 +39,12 @@ public class ServerHandler extends ChannelInboundHandlerAdapter
     }
 
     @Override
-    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception
-    {
+    public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
 
     }
 
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)
-    {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         // Close the connection when an exception is raised.
         cause.printStackTrace();
         ctx.close();

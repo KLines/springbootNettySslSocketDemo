@@ -14,11 +14,9 @@ import org.springframework.context.annotation.Configuration;
  * @since 2018-10-15
  */
 @Configuration
-public class InitServiceWrapper
-{
+public class InitServiceWrapper {
     @Bean("serviceWrapperContainer")
-    public ServiceWrapperContainer initWrapper(InquiryWrapper inquiryWrapper, SaveWrapper saveWrapper, CheckWrapper checkWrapper)
-    {
+    public ServiceWrapperContainer initWrapper(InquiryWrapper inquiryWrapper, SaveWrapper saveWrapper, CheckWrapper checkWrapper) {
         ServiceWrapperContainer serviceWrapper = new ServiceWrapperContainer();
         serviceWrapper.addService(inquiryWrapper);
         serviceWrapper.addService(saveWrapper);

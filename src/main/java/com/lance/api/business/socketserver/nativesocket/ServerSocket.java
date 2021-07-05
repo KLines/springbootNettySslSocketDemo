@@ -25,8 +25,7 @@ import java.security.KeyStore;
  */
 @Component("serverSocket")
 @Slf4j
-public class ServerSocket implements Runnable
-{
+public class ServerSocket implements Runnable {
     @Value("${sslSocket.port}")
     private int port;
     @Value("${sslSocket.server_key_store_password}")
@@ -44,23 +43,17 @@ public class ServerSocket implements Runnable
      * 启动程序
      */
     @Override
-    public void run()
-    {
-        if (serverSocket == null)
-        {
+    public void run() {
+        if (serverSocket == null) {
             log.error("ERROR:启动socket服务失败");
             return;
         }
-        while (true)
-        {
-            try
-            {
+        while (true) {
+            try {
                 Socket socket = serverSocket.accept();
 
                 dealSocket.analysisAndDealMsg(socket);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -69,10 +62,8 @@ public class ServerSocket implements Runnable
     /**
      * 初始化
      */
-    public void init()
-    {
-        try
-        {
+    public void init() {
+        try {
             SSLContext ctx = SSLContext.getInstance("SSL");
 
             KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
@@ -92,9 +83,7 @@ public class ServerSocket implements Runnable
 
             serverSocket = (SSLServerSocket) ctx.getServerSocketFactory().createServerSocket(port);
             serverSocket.setNeedClientAuth(true);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

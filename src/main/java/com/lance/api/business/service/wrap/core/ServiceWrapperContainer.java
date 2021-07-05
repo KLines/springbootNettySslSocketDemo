@@ -9,8 +9,7 @@ import java.util.List;
  * @author lance
  * @since 2018-10-15
  */
-public class ServiceWrapperContainer
-{
+public class ServiceWrapperContainer {
 
     List<BaseServiceWrapper> services = new ArrayList<>();
 
@@ -19,8 +18,7 @@ public class ServiceWrapperContainer
      *
      * @param baseServiceWrapper
      */
-    public void addService(BaseServiceWrapper baseServiceWrapper)
-    {
+    public void addService(BaseServiceWrapper baseServiceWrapper) {
         services.add(baseServiceWrapper);
     }
 
@@ -30,12 +28,9 @@ public class ServiceWrapperContainer
      * @param servCode
      * @return
      */
-    public BaseServiceWrapper getService(String servCode)
-    {
-        for (BaseServiceWrapper baseServiceWrapper : services)
-        {
-            if (baseServiceWrapper.isMyDo(servCode))
-            {
+    public BaseServiceWrapper getService(String servCode) {
+        for (BaseServiceWrapper baseServiceWrapper : services) {
+            if (baseServiceWrapper.isMyDo(servCode)) {
                 return baseServiceWrapper;
             }
         }
@@ -48,14 +43,11 @@ public class ServiceWrapperContainer
      * @param servCode
      * @return
      */
-    public List<BaseServiceWrapper> findSameService(String servCode)
-    {
+    public List<BaseServiceWrapper> findSameService(String servCode) {
 
         List<BaseServiceWrapper> baseServiceWrapperList = new ArrayList<>();
-        for (BaseServiceWrapper baseServiceWrapper : services)
-        {
-            if (baseServiceWrapper.hasSameService() && baseServiceWrapper.isMyDo(servCode))
-            {
+        for (BaseServiceWrapper baseServiceWrapper : services) {
+            if (baseServiceWrapper.hasSameService() && baseServiceWrapper.isMyDo(servCode)) {
                 baseServiceWrapperList.add(baseServiceWrapper);
             }
         }

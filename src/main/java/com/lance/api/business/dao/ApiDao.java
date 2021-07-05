@@ -11,6 +11,5 @@ import org.springframework.stereotype.Repository;
  * @since 2018-09-25
  **/
 @Repository
-public class ApiDao extends BaseDao
-{
+public class ApiDao extends BaseDao {
 }

@@ -14,8 +14,7 @@ import java.math.BigDecimal;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SampleModel
-{
+public class SampleModel {
     /**
      * 总数
      */

@@ -14,8 +14,7 @@ import java.util.Arrays;
  * 用于参数校验
  */
 @SuppressWarnings({"rawtypes", "unused", "unchecked"})
-public final class ValidationUtils
-{
+public final class ValidationUtils {
     /**
      * 参数校验.
      *
@@ -23,27 +22,21 @@ public final class ValidationUtils
      * @return 校验结果
      * @throws Exception e
      */
-    public static String validate(Object obj)
-    {
+    public static String validate(Object obj) {
         Assert.notNull(obj, "参数为null");
         // 校验结果
         String validateResult = null;
         // 获取类字段
         Field[] fields = obj.getClass().getDeclaredFields();
         // 遍历pojo的字段进行校验
-        for (Field field : fields)
-        {
-            try
-            {
+        for (Field field : fields) {
+            try {
                 validateResult = fieldValidate(obj, field);
-            }
-            catch (IllegalAccessException e)
-            {
+            } catch (IllegalAccessException e) {
                 e.printStackTrace();
                 validateResult = "校验过程出现异常";
             }
-            if (!StringUtils.isEmpty(validateResult))
-            {
+            if (!StringUtils.isEmpty(validateResult)) {
                 return validateResult;
             }
         }
@@ -59,8 +52,7 @@ public final class ValidationUtils
      * @return 单个字段的检验结果
      * @throws Exception e
      */
-    private static String fieldValidate(Object obj, Field field) throws IllegalAccessException
-    {
+    private static String fieldValidate(Object obj, Field field) throws IllegalAccessException {
         String backVal = null;
         // 获取字段名称
         String fieldName = field.getName();
@@ -71,17 +63,14 @@ public final class ValidationUtils
         // 校验结果
         field.setAccessible(true);
 
-        for (Annotation an : annotations)
-        {
+        for (Annotation an : annotations) {
             // 若扫描到Verification注解
-            if (an.annotationType().getName().equals(Validation.class.getName()))
-            {
+            if (an.annotationType().getName().equals(Validation.class.getName())) {
                 // 获取指定类型注解
                 Validation column = field.getAnnotation(Validation.class);
                 // 进行业务处理，校验
                 backVal = businessValidate(column, value);
-                if (!StringUtils.isEmpty(backVal))
-                {
+                if (!StringUtils.isEmpty(backVal)) {
                     return backVal;
                 }
             }
@@ -97,20 +86,14 @@ public final class ValidationUtils
      * @param value  字段值
      * @return 业务校验结果
      */
-    private static String businessValidate(Validation column, Object value)
-    {
+    private static String businessValidate(Validation column, Object value) {
         String emptyVal;
         String limitVal;
-        if (!StringUtils.isEmpty(emptyVal = mustEmptyValidate(column, value)))
-        {
+        if (!StringUtils.isEmpty(emptyVal = mustEmptyValidate(column, value))) {
             return emptyVal;
-        }
-        else if (!StringUtils.isEmpty(limitVal = limitValueValidate(column, value)))
-        {
+        } else if (!StringUtils.isEmpty(limitVal = limitValueValidate(column, value))) {
             return limitVal;
-        }
-        else
-        {
+        } else {
             return allowValueValidate(column, value);
         }
     }
@@ -122,14 +105,10 @@ public final class ValidationUtils
      * @param value  字段值
      * @return 业务校验结果
      */
-    private static String mustEmptyValidate(Validation column, Object value)
-    {
-        if (column.mustEmpty() && null != value)
-        {
+    private static String mustEmptyValidate(Validation column, Object value) {
+        if (column.mustEmpty() && null != value) {
             return column.limitMsg();
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -141,24 +120,17 @@ public final class ValidationUtils
      * @param value  字段值
      * @return 业务校验结果
      */
-    private static String limitValueValidate(Validation column, Object value)
-    {
+    private static String limitValueValidate(Validation column, Object value) {
         String[] limitArray = column.limitValue();
-        if (limitArray.length > 0)
-        {
+        if (limitArray.length > 0) {
             value = String.valueOf(value);
             boolean result = Arrays.asList(limitArray).contains(value);
-            if (result)
-            {
+            if (result) {
                 return column.limitMsg();
-            }
-            else
-            {
+            } else {
                 return null;
             }
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -170,24 +142,17 @@ public final class ValidationUtils
      * @param value  字段值
      * @return 业务校验结果
      */
-    private static String allowValueValidate(Validation column, Object value)
-    {
+    private static String allowValueValidate(Validation column, Object value) {
         String[] allowArray = column.allowValue();
-        if (allowArray.length > 0)
-        {
+        if (allowArray.length > 0) {
             value = String.valueOf(value);
             boolean result = Arrays.asList(allowArray).contains(value);
-            if (!result)
-            {
+            if (!result) {
                 return column.limitMsg();
-            }
-            else
-            {
+            } else {
                 return null;
             }
-        }
-        else
-        {
+        } else {
             return null;
         }
     }

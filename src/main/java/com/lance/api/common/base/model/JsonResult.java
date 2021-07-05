@@ -12,8 +12,7 @@ import java.util.HashMap;
  * @since 2017-11-24
  */
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class JsonResult extends HashMap<String, Object>
-{
+public class JsonResult extends HashMap<String, Object> {
     /**
      * 是否成功
      */
@@ -29,63 +28,53 @@ public class JsonResult extends HashMap<String, Object>
      */
     private final String data = "data";
 
-    public JsonResult()
-    {
+    public JsonResult() {
         super();
         this.setSuccess(true);
     }
 
-    public JsonResult(Object data)
-    {
+    public JsonResult(Object data) {
         super();
         this.setSuccess(true);
         this.setData(data);
     }
 
-    public JsonResult(boolean success, String message)
-    {
+    public JsonResult(boolean success, String message) {
         super();
         this.setSuccess(success);
         this.setMessage(message);
     }
 
-    public JsonResult(boolean success, String message, Object data)
-    {
+    public JsonResult(boolean success, String message, Object data) {
         super();
         this.setSuccess(success);
         this.setMessage(message);
         this.setData(data);
     }
 
-    public boolean getSuccess()
-    {
+    public boolean getSuccess() {
         return (Boolean) this.get(success);
     }
 
-    public JsonResult setSuccess(boolean value)
-    {
+    public JsonResult setSuccess(boolean value) {
         this.put(success, value);
         return this;
     }
 
-    public String getMessage()
-    {
+    public String getMessage() {
         return (String) this.get(message);
     }
 
-    public JsonResult setMessage(String value)
-    {
+    public JsonResult setMessage(String value) {
         this.put(message, value);
         return this;
     }
 
-    public Object getData()
-    {
+    public Object getData() {
         return this.get(data);
     }
 
-    public JsonResult setData(Object value)
-    {
+    public JsonResult setData(Object value) {
         this.put(data, value);
         return this;
     }

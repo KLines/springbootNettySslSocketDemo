@@ -12,8 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class DeSplitDemo
-{
+public class DeSplitDemo {
     private static final byte BLOCK_START_SIGN = 0x68;
     private static final String ENCODING = "UTF-8";
     //服务端地址
@@ -27,10 +26,8 @@ public class DeSplitDemo
     private static final String trustKeyPassword = "123456";
     private static final String tcp = "src\\test\\java\\com\\sslsocketclient\\res\\tclient.keystore";
 
-    public static Socket createSocketNote()
-    {
-        try
-        {
+    public static Socket createSocketNote() {
+        try {
             FileInputStream clientPrivateKey = new FileInputStream(kcp);
             FileInputStream trustKey = new FileInputStream(tcp);//客户端信任证书列表，即服务端证书
 
@@ -49,16 +46,13 @@ public class DeSplitDemo
             ctx.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
 
             return (Socket) ctx.getSocketFactory().createSocket(serverHost, serverPort);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    protected List doCanProcess(ByteDataBuffer obj) throws Exception
-    {
+    protected List doCanProcess(ByteDataBuffer obj) throws Exception {
         List list = new ArrayList();
         Map bodyMap;
         Map headMap;
@@ -71,8 +65,7 @@ public class DeSplitDemo
         databuf.setInBigEndian(false);
         int totalLen = 0; // 长度
         byte sign = databuf.readInt8();
-        if (sign != BLOCK_START_SIGN)
-        {
+        if (sign != BLOCK_START_SIGN) {
             System.out.println("无法找到起始标记!");
         }
 

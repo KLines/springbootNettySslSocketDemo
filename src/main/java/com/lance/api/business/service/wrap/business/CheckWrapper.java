@@ -15,8 +15,7 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class CheckWrapper extends BaseServiceWrapper
-{
+public class CheckWrapper extends BaseServiceWrapper {
 
     /**
      * 此业务包装类的servCode
@@ -29,8 +28,7 @@ public class CheckWrapper extends BaseServiceWrapper
      * @return
      */
     @Override
-    public String doCode()
-    {
+    public String doCode() {
         return servCode;
     }
 
@@ -42,8 +40,7 @@ public class CheckWrapper extends BaseServiceWrapper
      * @throws Exception
      */
     @Override
-    public Map handle(Object... params) throws Exception
-    {
+    public Map handle(Object... params) throws Exception {
         // 返回结果map
         return Communication.getInstance().getSuccessMap();
     }

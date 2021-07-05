@@ -21,8 +21,7 @@ import java.math.BigDecimal;
  **/
 @Slf4j
 @Service
-public class ApiServiceImpl implements ApiService
-{
+public class ApiServiceImpl implements ApiService {
     @Autowired
     private SysDao sysDao;
     @Autowired
@@ -36,10 +35,8 @@ public class ApiServiceImpl implements ApiService
      * @throws Exception
      */
     @Override
-    public JsonResult queryInfo(String key) throws Exception
-    {
-        if (key.contains("1"))
-        {
+    public JsonResult queryInfo(String key) throws Exception {
+        if (key.contains("1")) {
             return new JsonResult(false, "查询失败", ResponseCode._1002);
         }
         return new JsonResult(true, "查询成功", new SampleModel(65535, BigDecimal.TEN));
@@ -54,8 +51,7 @@ public class ApiServiceImpl implements ApiService
      * @throws Exception
      */
     @Override
-    public JsonResult saveData(String key, String msg) throws Exception
-    {
+    public JsonResult saveData(String key, String msg) throws Exception {
         System.out.println(key);
         System.out.println(msg);
         return new JsonResult(true, "存储成功");

@@ -22,8 +22,7 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class SaveWrapper extends BaseServiceWrapper
-{
+public class SaveWrapper extends BaseServiceWrapper {
     /**
      * 此业务包装类的servCode
      */
@@ -32,14 +31,12 @@ public class SaveWrapper extends BaseServiceWrapper
     private ApiService apiService;
 
     @Override
-    public String doCode()
-    {
+    public String doCode() {
         return servCode;
     }
 
     @Override
-    public Map handle(Object... params) throws Exception
-    {
+    public Map handle(Object... params) throws Exception {
         Map<String, Object> resultMap;
         ResponseCode failedMsg = null;
 
@@ -50,24 +47,18 @@ public class SaveWrapper extends BaseServiceWrapper
         String type = bodyModel.getQueryValue();
 
         JsonResult saveResult = null;
-        try
-        {
+        try {
             saveResult = apiService.saveData(key, type);
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             log.error("系统发生异常: {}", e.getMessage());
             e.printStackTrace();
 
             return Communication.getInstance().getErroMap();
         }
 
-        if (saveResult.getSuccess())
-        {
+        if (saveResult.getSuccess()) {
             resultMap = Communication.getInstance().getSuccessMap();
-        }
-        else
-        {
+        } else {
             failedMsg = (ResponseCode) saveResult.getData();
             resultMap = Communication.getInstance().getFailedMap(failedMsg.getKey(), failedMsg.getValue());
         }

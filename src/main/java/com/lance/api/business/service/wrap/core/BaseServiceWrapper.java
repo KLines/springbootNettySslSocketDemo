@@ -8,8 +8,7 @@ import java.util.Map;
  * @author lance
  * @since 2018-10-15
  */
-public abstract class BaseServiceWrapper extends SameServiceWrapper
-{
+public abstract class BaseServiceWrapper extends SameServiceWrapper {
     /**
      * 获取当前servCode
      *
@@ -23,8 +22,7 @@ public abstract class BaseServiceWrapper extends SameServiceWrapper
      * @param doCode
      * @return
      */
-    public Boolean isMyDo(String doCode)
-    {
+    public Boolean isMyDo(String doCode) {
         return doCode.equals(doCode());
     }
 

@@ -3,8 +3,7 @@ package com.lance.api.common.constant;
 /**
  * 业务编码
  */
-public class ServerCode
-{
+public class ServerCode {
     /**
      * 查询
      */

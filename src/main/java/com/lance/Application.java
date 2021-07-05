@@ -17,8 +17,7 @@ import java.util.concurrent.Executor;
  * @since 2018-10-15
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-public class Application implements CommandLineRunner
-{
+public class Application implements CommandLineRunner {
     @Autowired
     private NettyServer nettyServer;
     @Autowired
@@ -26,14 +25,12 @@ public class Application implements CommandLineRunner
     @Autowired
     private Executor threadAsyncServiceProvider;
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
     @Override
-    public void run(String... args) throws Exception
-    {
+    public void run(String... args) throws Exception {
         serverSocket.init();
         // 启动新线程是为了原生socket与netty共存启动
         threadAsyncServiceProvider.execute(serverSocket);

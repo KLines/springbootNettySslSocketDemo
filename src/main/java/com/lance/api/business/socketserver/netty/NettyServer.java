@@ -27,8 +27,9 @@ import java.security.KeyStore;
  */
 @Component
 @Slf4j
-public class NettyServer extends ChannelInitializer
-{
+public class NettyServer extends ChannelInitializer {
+    private static final EventLoopGroup BOSS_GROUP = new NioEventLoopGroup();
+    private static final EventLoopGroup WORKER_GROUP = new NioEventLoopGroup();
     @Value("${sslSocket.nettyPort}")
     private int port;
     @Value("${sslSocket.sslFlag:false}")
@@ -37,10 +38,6 @@ public class NettyServer extends ChannelInitializer
     private String serverKeyStorePassword;
     @Value("${sslSocket.server_trust_key_store_password}")
     private String serverTrustKeyStorePassWord;
-
-    private static final EventLoopGroup BOSS_GROUP = new NioEventLoopGroup();
-    private static final EventLoopGroup WORKER_GROUP = new NioEventLoopGroup();
-
     /**
      * 业务处理器
      */
@@ -51,8 +48,7 @@ public class NettyServer extends ChannelInitializer
      * 关闭服务
      */
     @PreDestroy
-    public void close()
-    {
+    public void close() {
         log.info("关闭服务....");
         BOSS_GROUP.shutdownGracefully();
         WORKER_GROUP.shutdownGracefully();
@@ -61,11 +57,9 @@ public class NettyServer extends ChannelInitializer
     /**
      * 开启服务
      */
-    public void start() throws Exception
-    {
+    public void start() throws Exception {
         final SSLContext sslCtx;
-        if (ssl)
-        {
+        if (ssl) {
             sslCtx = SSLContext.getInstance("SSL");
 
             KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
@@ -83,9 +77,7 @@ public class NettyServer extends ChannelInitializer
             tmf.init(tks);
 
             sslCtx.init(kmf.getKeyManagers(), tmf.getTrustManagers(), null);
-        }
-        else
-        {
+        } else {
             sslCtx = null;
         }
         ServerBootstrap serverBootstrap = new ServerBootstrap();
@@ -93,16 +85,12 @@ public class NettyServer extends ChannelInitializer
         serverBootstrap.channel(NioServerSocketChannel.class);
         serverBootstrap.option(ChannelOption.SO_BACKLOG, 100);
 
-        try
-        {
+        try {
             //设置事件处理
-            serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>()
-            {
+            serverBootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
                 @Override
-                protected void initChannel(SocketChannel ch) throws Exception
-                {
-                    if (sslCtx != null)
-                    {
+                protected void initChannel(SocketChannel ch) throws Exception {
+                    if (sslCtx != null) {
                         SSLEngine sslEngine = sslCtx.createSSLEngine();
                         sslEngine.setUseClientMode(false);
                         ch.pipeline().addFirst(new SslHandler(sslEngine));
@@ -120,9 +108,7 @@ public class NettyServer extends ChannelInitializer
             log.info("netty服务在[{}]端口启动监听", port);
             ChannelFuture future = serverBootstrap.bind(port).sync();
             future.channel().closeFuture().sync();
-        }
-        catch (InterruptedException e)
-        {
+        } catch (InterruptedException e) {
             log.info("[出现异常] 释放资源");
             BOSS_GROUP.shutdownGracefully();
             WORKER_GROUP.shutdownGracefully();
@@ -130,8 +116,7 @@ public class NettyServer extends ChannelInitializer
     }
 
     @Override
-    protected void initChannel(Channel channel) throws Exception
-    {
+    protected void initChannel(Channel channel) throws Exception {
 
     }
 }

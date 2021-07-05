@@ -6,8 +6,7 @@ package com.lance.api.business.pojo.model;
  * @author lance
  * @since 2018-10-17
  */
-public interface FieldNameModel
-{
+public interface FieldNameModel {
     /**
      * 记录数
      */

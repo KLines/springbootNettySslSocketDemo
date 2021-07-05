@@ -14,8 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EntryHeadModel
-{
+public class EntryHeadModel {
     /**
      * 报文id
      */

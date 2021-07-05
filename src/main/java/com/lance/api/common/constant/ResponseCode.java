@@ -10,8 +10,7 @@ import java.util.Map;
  * @since 2018-10-17
  */
 
-public enum ResponseCode
-{
+public enum ResponseCode {
     //成功代码
     _9999("9999", "交易成功"),
     //程序类错误
@@ -34,88 +33,71 @@ public enum ResponseCode
     private Map<String, String> valuesMap = new HashMap<>();
     private String code;
 
-    public String getValue(String s)
-    {
-        return valuesMap.get(s);
-    }
-
-    public static class Values
-    {
-
-
-        public Values(String key, String value)
-        {
-            this.key = key;
-            this.value = value;
-        }
-
-        private String key;
-        private String value;
-
-        public String getKey()
-        {
-            return key;
-        }
-
-        public void setKey(String key)
-        {
-            this.key = key;
-        }
-
-        public String getValue()
-        {
-            return value;
-        }
-
-        public void setValue(String value)
-        {
-            this.value = value;
-        }
-
-    }
-
-    private ResponseCode(String code, Values... values)
-    {
+    private ResponseCode(String code, Values... values) {
         this.code = code;
-        if (values != null && values.length > 0)
-        {
+        if (values != null && values.length > 0) {
             this.code = code;
             this.key = values[0].getKey();
             this.value = values[0].getValue();
 
-            for (Values v : values)
-            {
+            for (Values v : values) {
                 valuesMap.put(v.getKey(), v.getValue());
             }
         }
     }
 
-    private ResponseCode(String key, String value)
-    {
+    private ResponseCode(String key, String value) {
         this.code = key;
         this.key = key;
         this.value = value;
     }
 
+    public String getValue(String s) {
+        return valuesMap.get(s);
+    }
 
-    public String getCode()
-    {
+    public String getCode() {
         return code;
     }
 
-    public String getKey()
-    {
+    public String getKey() {
         return this.key;
     }
 
-    public String getValue()
-    {
+    public String getValue() {
         return this.value;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.key + ":" + this.value;
+    }
+
+    public static class Values {
+
+
+        private String key;
+        private String value;
+        public Values(String key, String value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
     }
 }

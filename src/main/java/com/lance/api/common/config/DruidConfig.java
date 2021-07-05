@@ -23,8 +23,7 @@ import java.util.List;
 @ConfigurationProperties(prefix = "spring.datasource")
 @Configuration
 @EnableTransactionManagement
-public class DruidConfig
-{
+public class DruidConfig {
     private String url;
     private String username;
     private String password;
@@ -45,8 +44,7 @@ public class DruidConfig
     private String connectionProperties;
 
     @Bean
-    public DataSource dataSource()
-    {
+    public DataSource dataSource() {
         DruidDataSource datasource = new DruidDataSource();
         datasource.setUrl(url);
         datasource.setUsername(username);
@@ -67,12 +65,9 @@ public class DruidConfig
         List list = new ArrayList();
         list.add(logFilter());
         datasource.setProxyFilters(list);
-        try
-        {
+        try {
             datasource.setFilters(filters);
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.err.println("druid configuration initialization filter: " + e);
         }
         datasource.setConnectionProperties(connectionProperties);
@@ -80,14 +75,12 @@ public class DruidConfig
     }
 
     @Bean
-    public PlatformTransactionManager transactionManager() throws SQLException
-    {
+    public PlatformTransactionManager transactionManager() throws SQLException {
         return new DataSourceTransactionManager(dataSource());
     }
 
     @Bean
-    public Slf4jLogFilter logFilter()
-    {
+    public Slf4jLogFilter logFilter() {
         Slf4jLogFilter slf4jLogFilter = new Slf4jLogFilter();
         slf4jLogFilter.setConnectionLogEnabled(false);
         //  输出sql连接状态

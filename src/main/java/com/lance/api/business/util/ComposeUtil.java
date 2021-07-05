@@ -8,7 +8,6 @@ import com.lance.api.business.pojo.model.EntryBodyModel;
 import com.lance.api.business.pojo.model.EntryHeadModel;
 import com.lance.api.business.pojo.model.EntryModel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
@@ -26,8 +25,7 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class ComposeUtil
-{
+public class ComposeUtil {
     private static final byte BLOCK_BGN_SIGN = 0x68;
     private static final byte BLOCK_END_SIGN = 0x16;
     private static final String ENCODING = "UTF-8";
@@ -41,8 +39,7 @@ public class ComposeUtil
      * @return
      * @throws Exception
      */
-    public static byte[] doCanProcess(Map paraMap, String serverCode, String msgId) throws Exception
-    {
+    public static byte[] doCanProcess(Map paraMap, String serverCode, String msgId) throws Exception {
         Map<String, Object> map = new HashMap<>();
         Map<String, String> headMap = new HashMap<>();
         // 服务编码
@@ -84,16 +81,14 @@ public class ComposeUtil
      * @return
      * @throws Exception
      */
-    public static EntryModel deSplit(ByteDataBuffer obj) throws Exception
-    {
+    public static EntryModel deSplit(ByteDataBuffer obj) throws Exception {
         ByteDataBuffer dataBuf = obj;
         dataBuf.setEncoding(ENCODING);
         dataBuf.setInBigEndian(false);
         // 长度
         int totalLen = 0;
         byte sign = dataBuf.readInt8();
-        if (sign != BLOCK_BGN_SIGN)
-        {
+        if (sign != BLOCK_BGN_SIGN) {
             log.info("无法找到起始标记!");
             return null;
         }
@@ -106,11 +101,9 @@ public class ComposeUtil
 
         // 报文是json格式，把json报文转换成对象类型的
         EntryModel entryModel = JSON.parseObject(message, EntryModel.class);
-        EntryHeadModel headModel = JSON.parseObject(entryModel.getHead(), new TypeReference<EntryHeadModel>()
-        {
+        EntryHeadModel headModel = JSON.parseObject(entryModel.getHead(), new TypeReference<EntryHeadModel>() {
         });
-        EntryBodyModel bodyModel = JSON.parseObject(entryModel.getBody(), new TypeReference<EntryBodyModel>()
-        {
+        EntryBodyModel bodyModel = JSON.parseObject(entryModel.getBody(), new TypeReference<EntryBodyModel>() {
         });
         entryModel.setHeadModel(headModel);
         entryModel.setBodyModel(bodyModel);
@@ -126,25 +119,19 @@ public class ComposeUtil
      * @param needLen 报文长度规定的字符数
      * @return
      */
-    private static String getLen(String text, int needLen)
-    {
-        if (text != null)
-        {
+    private static String getLen(String text, int needLen) {
+        if (text != null) {
             int len;
-            try
-            {
+            try {
                 len = text.getBytes("utf-8").length;
                 String lenStr = String.valueOf(len);
                 StringBuffer sb = new StringBuffer(lenStr);
-                while (sb.length() < needLen)
-                {
+                while (sb.length() < needLen) {
                     sb.insert(0, "0");
 
                 }
                 return sb.toString();
-            }
-            catch (UnsupportedEncodingException e)
-            {
+            } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
         }
